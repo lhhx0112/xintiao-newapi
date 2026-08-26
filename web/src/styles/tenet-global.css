@@ -1,0 +1,230 @@
+/*
+TENET Console — 暖白纸感 + 古铜金点缀（Intelligent Minimalism）。
+全局背景：固定暖白画布 + 顶部金色光晕（不随滚动移动），卡片在其上滑动。
+仅影响视觉与配色，不影响任何业务逻辑/数据/API。
+*/
+
+/* 全局暖白纸感画布（亮色） */
+body {
+  --background: oklch(0.988 0.005 88);
+  --foreground: oklch(0.24 0.012 60);
+  --card: oklch(0.998 0.003 88);
+  --card-foreground: oklch(0.24 0.012 60);
+  --popover: oklch(0.998 0.003 88);
+  --popover-foreground: oklch(0.24 0.012 60);
+  --secondary: oklch(0.955 0.008 86);
+  --secondary-foreground: oklch(0.3 0.012 60);
+  --muted: oklch(0.948 0.008 86);
+  --muted-foreground: oklch(0.5 0.015 60);
+  --accent: oklch(0.94 0.016 80);
+  --accent-foreground: oklch(0.28 0.012 60);
+  --border: oklch(0.905 0.012 85);
+  --input: oklch(0.905 0.012 85);
+
+  /* 侧边栏暖白 */
+  --sidebar: oklch(0.972 0.005 88);
+  --sidebar-foreground: oklch(0.26 0.012 60);
+  --sidebar-accent: oklch(0.94 0.016 80);
+  --sidebar-accent-foreground: oklch(0.28 0.012 60);
+  --sidebar-border: oklch(0.905 0.012 85);
+  --sidebar-ring: oklch(0.62 0.12 70);
+
+  /* TENET 古铜金系列（bronze → champagne → 浅金） */
+  --overview-accent-1: oklch(0.62 0.12 70);   /* 古铜 #b47825 */
+  --overview-accent-2: oklch(0.68 0.11 75);   /* 香槟 #c08e43 */
+  --overview-accent-3: oklch(0.75 0.09 80);   /* 浅金 #cca86a */
+
+  --chart-1: oklch(0.62 0.12 70);
+  --chart-2: oklch(0.68 0.11 75);
+  --chart-3: oklch(0.75 0.09 80);
+  --chart-4: oklch(0.72 0.13 65);
+  --chart-5: oklch(0.8 0.08 90);
+
+  /* 主强调色（登录后控制台内主按钮/激活态） */
+  --primary: oklch(0.6 0.11 68);
+  --primary-foreground: oklch(0.99 0.005 95);
+  --ring: oklch(0.62 0.12 70);
+
+  /* 固定背景：暖白纸 + 顶部金色光晕（background-attachment 保持滚动时不移动） */
+  background-color: var(--background) !important;
+  background-image: radial-gradient(
+    120% 60% at 50% 0%,
+    oklch(0.7 0.12 75 / 0.10),
+    transparent 60%
+  ) !important;
+  background-attachment: fixed !important;
+  background-repeat: no-repeat !important;
+}
+
+/* 暗色：暖炭黑画布 + 亮一点的金 */
+.dark body {
+  --background: oklch(0.235 0.008 60);
+  --foreground: oklch(0.96 0.006 88);
+  --card: oklch(0.28 0.008 60);
+  --card-foreground: oklch(0.96 0.006 88);
+  --popover: oklch(0.3 0.008 60);
+  --popover-foreground: oklch(0.96 0.006 88);
+  --secondary: oklch(0.32 0.008 60);
+  --secondary-foreground: oklch(0.94 0.006 88);
+  --muted: oklch(0.31 0.008 60);
+  --muted-foreground: oklch(0.76 0.01 80);
+  --accent: oklch(0.36 0.015 55);
+  --accent-foreground: oklch(0.98 0.006 88);
+  --border: oklch(1 0 0 / 11%);
+  --input: oklch(1 0 0 / 16%);
+
+  --sidebar: oklch(0.26 0.008 60);
+  --sidebar-foreground: oklch(0.94 0.006 88);
+  --sidebar-accent: oklch(0.36 0.015 55);
+  --sidebar-accent-foreground: oklch(0.98 0.006 88);
+  --sidebar-border: oklch(1 0 0 / 11%);
+
+  --overview-accent-1: oklch(0.72 0.12 78);
+  --overview-accent-2: oklch(0.68 0.11 75);
+  --overview-accent-3: oklch(0.6 0.11 68);
+
+  --chart-1: oklch(0.72 0.12 78);
+  --chart-2: oklch(0.68 0.11 75);
+  --chart-3: oklch(0.6 0.11 68);
+
+  --primary: oklch(0.72 0.12 78);
+  --primary-foreground: oklch(0.16 0.01 60);
+  --ring: oklch(0.72 0.12 78);
+
+  background-color: var(--background) !important;
+  background-image: radial-gradient(
+    120% 60% at 50% 0%,
+    oklch(0.72 0.12 78 / 0.12),
+    transparent 60%
+  ) !important;
+  background-attachment: fixed !important;
+}
+/* ===== TENET 微动画（参考站风格：金色渐变流动 / 卡片浮起 / 弹层缩放入场） ===== */
+
+/* 顶部导航金色渐变光带：参考站 progress-slide 动画 */
+.tenet-progress-sheen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 99999;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    #cda047 20%,
+    #bc8a35 50%,
+    #cda047 80%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: tenet-progress-slide 1.5s ease-in-out infinite;
+  transition: opacity 0.2s ease-out;
+}
+.dark .tenet-progress-sheen {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    #bc8a35 20%,
+    #cda047 50%,
+    #bc8a35 80%,
+    transparent 100%
+  );
+}
+@keyframes tenet-progress-slide {
+  0% {
+    background-position: 0% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tenet-progress-sheen {
+    animation: none;
+    opacity: 0.5;
+  }
+}
+
+/* 卡片 hover 轻微浮起 + 金色边框反馈（参考站 ds-card-hover 思路） */
+.tenet-card-hover {
+  transition:
+    transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.28s ease;
+}
+.tenet-card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px -12px oklch(0.62 0.12 70 / 0.25);
+  border-color: oklch(0.62 0.12 70 / 0.45);
+}
+.dark .tenet-card-hover:hover {
+  box-shadow: 0 14px 36px -12px oklch(0.72 0.12 78 / 0.35);
+  border-color: oklch(0.72 0.12 78 / 0.5);
+}
+@media (prefers-reduced-motion: reduce) {
+  .tenet-card-hover {
+    transition: none;
+  }
+  .tenet-card-hover:hover {
+    transform: none;
+  }
+}
+
+/* 弹层/下拉缩放入场（参考站 scaleIn 0.2s ease-out） */
+.tenet-scale-in {
+  animation: tenet-scale-in 0.2s ease-out;
+  transform-origin: top right;
+}
+@keyframes tenet-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tenet-scale-in {
+    animation: none;
+  }
+}
+
+/* ===== 暗色模式下默认黑色 logo 反白（避免黑字消失于暗色背景） ===== */
+.dark img[src='/logo.png'],
+.dark img[src='logo.png'] {
+  filter: invert(1);
+  /* 少量过渡，主题切换更柔和 */
+  transition: filter 0.25s ease;
+}
+
+/* ===== 侧边栏激活项金色（参考站 sidebar-link-active：暖金底 + 古铜字） ===== */
+[data-slot='sidebar-menu-button'][data-active='true'],
+.sidebar-menu-button[data-active='true'] {
+  background-color: oklch(0.94 0.05 80);
+  color: oklch(0.52 0.11 62);
+}
+.dark [data-slot='sidebar-menu-button'][data-active='true'],
+.dark .sidebar-menu-button[data-active='true'] {
+  background-color: oklch(0.32 0.05 60);
+  color: oklch(0.78 0.11 75);
+}
+
+/* 侧边栏激活项金色（参考站 sidebar-link-active：暖金底 + 古铜字） */
+.sidebar-menu-button[data-active='true'] {
+  background-color: oklch(0.94 0.05 80) !important;
+  color: oklch(0.52 0.11 62) !important;
+}
+.sidebar-menu-button[data-active='true']:hover {
+  background-color: oklch(0.9 0.05 80) !important;
+}
+.dark .sidebar-menu-button[data-active='true'] {
+  background-color: oklch(0.34 0.06 60) !important;
+  color: oklch(0.8 0.11 75) !important;
+}
+.dark .sidebar-menu-button[data-active='true']:hover {
+  background-color: oklch(0.37 0.06 60) !important;
+}

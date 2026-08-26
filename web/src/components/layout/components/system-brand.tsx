@@ -23,6 +23,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarTrigger,
 } from '@/components/ui/sidebar'
 import { useStatus } from '@/hooks/use-status'
 import { useSystemConfig } from '@/hooks/use-system-config'
@@ -51,9 +52,10 @@ export function SystemBrand(props: SystemBrandProps) {
   const { logo } = useSystemConfig()
 
   const variant = props.variant ?? 'sidebar'
-  const name = status?.system_name || props.defaultName || 'New API'
+  const name = status?.system_name || props.defaultName || 'TENET 信条'
+  // 优先显示后台可编辑的品牌版本号（version_name），其次显示构建版本号
   const version =
-    status?.version || props.defaultVersion || t('Unknown version')
+    status?.version_name || status?.version || props.defaultVersion || t('Unknown version')
 
   if (variant === 'inline') {
     return (
@@ -69,7 +71,7 @@ export function SystemBrand(props: SystemBrandProps) {
           <img
             src={logo}
             alt={t('Logo')}
-            className='size-full rounded-md object-cover'
+            className='size-full rounded-md object-contain'
           />
         </div>
         <span className='max-w-[12rem] truncate'>{name}</span>
@@ -78,26 +80,33 @@ export function SystemBrand(props: SystemBrandProps) {
   }
 
   return (
-    <SidebarMenu>
-      <SidebarMenuItem>
-        <SidebarMenuButton
-          size='lg'
-          className='hover:text-sidebar-foreground active:text-sidebar-foreground cursor-default hover:bg-transparent active:bg-transparent'
-          render={<div />}
-        >
-          <div className='flex aspect-square size-8 items-center justify-center overflow-hidden rounded-lg'>
-            <img
-              src={logo}
-              alt={t('Logo')}
-              className='size-full rounded-lg object-cover'
-            />
-          </div>
-          <div className='grid flex-1 text-start text-sm leading-tight group-data-[collapsible=icon]:hidden'>
-            <span className='truncate font-semibold'>{name}</span>
-            <span className='truncate text-xs'>{version}</span>
-          </div>
-        </SidebarMenuButton>
-      </SidebarMenuItem>
-    </SidebarMenu>
+    <div className='flex w-full items-center gap-1'>
+      <SidebarMenu className='min-w-0 flex-1'>
+        <SidebarMenuItem>
+          <SidebarMenuButton
+            size='lg'
+            className='hover:text-sidebar-foreground active:text-sidebar-foreground cursor-default hover:bg-transparent active:bg-transparent'
+            render={<div />}
+          >
+            <div className='flex aspect-square size-8 items-center justify-center overflow-hidden rounded-lg bg-white p-0.5 dark:bg-transparent'>
+              <img
+                src={logo}
+                alt={t('Logo')}
+                className='size-full rounded-lg object-contain'
+              />
+            </div>
+            <div className='grid flex-1 text-start text-sm leading-tight group-data-[collapsible=icon]:hidden'>
+              <span className='truncate font-semibold'>{name}</span>
+              <span className='truncate text-xs'>{version}</span>
+            </div>
+          </SidebarMenuButton>
+        </SidebarMenuItem>
+      </SidebarMenu>
+      <SidebarTrigger
+        variant='ghost'
+        size='icon-sm'
+        className='shrink-0 text-sidebar-foreground/70 hover:text-sidebar-foreground'
+      />
+    </div>
   )
 }

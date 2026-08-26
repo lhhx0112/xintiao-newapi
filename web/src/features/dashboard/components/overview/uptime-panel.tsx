@@ -45,7 +45,7 @@ const StatusDot = memo(function StatusDot(props: { status: number }) {
   return <span className={cn('inline-block size-2 rounded-full', color)} />
 })
 
-export function UptimePanel() {
+export function UptimePanel(props: { compact?: boolean }) {
   const { t } = useTranslation()
   const [groups, setGroups] = useState<UptimeGroupResult[]>([])
   const [loading, setLoading] = useState(true)
@@ -108,7 +108,7 @@ export function UptimePanel() {
       loading={loading}
       empty={!groups.length}
       emptyMessage={t('No uptime monitoring configured')}
-      height='h-80'
+      height={props.compact ? 'h-44' : 'h-80'}
       contentClassName='p-0'
       headerActions={
         <Button
@@ -125,7 +125,7 @@ export function UptimePanel() {
         </Button>
       }
     >
-      <ScrollArea className='h-80'>
+      <ScrollArea className={props.compact ? 'h-44' : 'h-80'}>
         <div>
           {groups.map((group, groupIdx) => (
             <div key={group.categoryName}>

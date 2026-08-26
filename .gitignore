@@ -41,3 +41,25 @@ service/relayconvert/chat_responses_live_local_test.go
 service/openaicompat/chat_responses_live_local_test.go
 go.work
 go.work.sum
+
+# ---- TENET project additions ----
+# Local environment overrides (do not upload real secrets)
+.env.*
+!.env.example
+*.local
+web/.env
+web/.env.*
+
+# Logs anywhere
+*.log
+
+# SQLite WAL/SHM + local db backups
+*.db-wal
+*.db-shm
+backups/
+db_backups/
+data/
+
+# Local build/scratch
+*.tmp
+*~

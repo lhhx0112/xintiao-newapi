@@ -26,7 +26,8 @@ import {
 
 const defaultSiteSettings: SiteSettings = {
   Notice: '',
-  SystemName: 'New API',
+  SystemName: 'TENET 信条',
+  VersionName: '',
   Logo: '',
   Footer: '',
   About: '',

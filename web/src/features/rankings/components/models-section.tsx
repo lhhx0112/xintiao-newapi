@@ -187,7 +187,7 @@ export function ModelsSection(props: ModelsSectionProps) {
       </header>
 
       <div className='px-5 pb-5'>
-        <div className='h-60 sm:h-72'>
+        <div className='h-44 sm:h-52'>
           {themeReady && spec ? (
             <VChart
               key={`models-history-${resolvedTheme}-${props.period}`}
