@@ -228,3 +228,206 @@ body {
 .dark .sidebar-menu-button[data-active='true']:hover {
   background-color: oklch(0.37 0.06 60) !important;
 }
+
+
+
+/* ===== TENET 浮动标签输入框（登录/注册） =====
+   参考用户提供的开源动画输入框：
+   - 无边框、底部细线
+   - 聚焦 / 有值时标签逐字弹起（cubic-bezier 回弹）
+   仅影响视觉，不改任何表单逻辑 / 校验 / 提交。 */
+.tenet-float-field {
+  position: relative;
+  margin: 22px 0 30px;
+  width: 100%;
+}
+
+.tenet-float-field input {
+  background-color: transparent;
+  border: 0;
+  border-bottom: 2px solid oklch(0.62 0.12 70 / 0.5);
+  display: block;
+  width: 100%;
+  padding: 12px 0;
+  font-size: 17px;
+  color: var(--foreground);
+  transition: border-color 0.25s ease;
+}
+
+.tenet-float-field input:focus {
+  outline: 0;
+  border-bottom-color: oklch(0.62 0.12 70);
+}
+
+.tenet-float-field input:focus-visible {
+  box-shadow: none;
+}
+
+.tenet-float-field label {
+  position: absolute;
+  top: 12px;
+  left: 0;
+  pointer-events: none;
+}
+
+.tenet-float-field label span {
+  display: inline-block;
+  font-size: 17px;
+  min-width: 5px;
+  color: var(--muted-foreground);
+  /* 逐字轮流弹起：每个字符的 transitionDelay 由组件内联 style 提供 */
+  transition:
+    transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55),
+    color 0.3s ease;
+}
+
+/* 聚焦或有值时标签逐字弹起并变为品牌金 */
+.tenet-float-field input:focus ~ label span,
+.tenet-float-field input:not(:placeholder-shown) ~ label span {
+  color: oklch(0.6 0.11 68);
+  transform: translateY(-28px);
+}
+
+/* 错误态：输入框底部变红 + 标签变红 */
+.tenet-float-field input[aria-invalid='true'] {
+  border-bottom-color: oklch(0.62 0.25 25);
+}
+.tenet-float-field input[aria-invalid='true'] ~ label span {
+  color: oklch(0.62 0.25 25);
+}
+
+.tenet-float-field input[aria-invalid='true']:focus {
+  border-bottom-color: oklch(0.62 0.25 25);
+}
+
+/* 暗色模式微调 */
+.dark .tenet-float-field input {
+  border-bottom-color: oklch(0.72 0.12 78 / 0.5);
+}
+.dark .tenet-float-field input:focus {
+  border-bottom-color: oklch(0.72 0.12 78);
+}
+.dark .tenet-float-field input:focus ~ label span,
+.dark .tenet-float-field input:not(:placeholder-shown) ~ label span {
+  color: oklch(0.72 0.12 78);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tenet-float-field label span {
+    transition: none;
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .tenet-animated-button,
+  .tenet-animated-button svg,
+  .tenet-animated-button .circle,
+  .tenet-animated-button .text {
+    transition: none;
+  }
+}
+
+/* ===== TENET 动画提交按钮（登录/注册） =====
+   严格复刻开源 animated-button 动效：
+   药丸 + 金色描边；hover 时圆从中心扩散填满、双箭头滑动、文字右移、圆角变方。
+   配色按 TENET 品牌金。 */
+.tenet-animated-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 16px 36px;
+  border: 4px solid;
+  border-color: transparent;
+  font-size: 16px;
+  background-color: inherit;
+  border-radius: 100px;
+  font-weight: 600;
+  color: oklch(0.72 0.12 78);
+  box-shadow: 0 0 0 2px oklch(0.72 0.12 78);
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.tenet-animated-button svg {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  fill: oklch(0.72 0.12 78);
+  z-index: 9;
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.tenet-animated-button .arr-1 {
+  right: 16px;
+}
+
+.tenet-animated-button .arr-2 {
+  left: -25%;
+}
+
+.tenet-animated-button .circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  aspect-ratio: 1;
+  height: auto;
+  background-color: oklch(0.72 0.12 78);
+  border-radius: 50%;
+  opacity: 0;
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.tenet-animated-button .text {
+  position: relative;
+  z-index: 1;
+  transform: translateX(-12px);
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.tenet-animated-button:hover {
+  box-shadow: 0 0 0 12px transparent;
+  color: oklch(0.99 0.005 95);
+  border-radius: 12px;
+}
+
+.tenet-animated-button:hover .arr-1 {
+  right: -25%;
+}
+
+.tenet-animated-button:hover .arr-2 {
+  left: 16px;
+}
+
+.tenet-animated-button:hover .text {
+  transform: translateX(12px);
+}
+
+.tenet-animated-button:hover svg {
+  fill: oklch(0.99 0.005 95);
+}
+
+.tenet-animated-button:active {
+  scale: 0.95;
+  box-shadow: 0 0 0 4px oklch(0.72 0.12 78);
+}
+
+.tenet-animated-button:hover .circle {
+  width: 300%;
+  height: auto;
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tenet-animated-button,
+  .tenet-animated-button svg,
+  .tenet-animated-button .circle,
+  .tenet-animated-button .text {
+    transition: none;
+  }
+}
