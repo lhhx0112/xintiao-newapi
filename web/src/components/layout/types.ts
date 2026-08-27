@@ -96,6 +96,8 @@ export type TopNavLink = {
   isActive?: boolean
   disabled?: boolean
   requiresAuth?: boolean
+  /** 顶部导航链接对应的图标（与侧边栏一致） */
+  icon?: React.ElementType
   external?: boolean
 }
 

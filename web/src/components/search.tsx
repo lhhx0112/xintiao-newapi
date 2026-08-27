@@ -16,44 +16,71 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 For commercial licensing, please contact support@quantumnous.com
 */
-import { SearchIcon } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
 import { useSearch } from '@/context/search-provider'
 import { cn } from '@/lib/utils'
 
-import { Button } from './ui/button'
-
 type SearchProps = {
   className?: string
-  type?: React.HTMLInputTypeAttribute
   placeholder?: string
 }
 
+/**
+ * TENET 搜索框：参考用户提供的开源 messageBox 组件样式。
+ * - 圆角消息框外观：左侧搜索图标 + 中间提示文字 + 右侧发送按钮
+ * - 整块是一个按钮：点击任意位置都会打开 ⌘K 命令面板（原有功能完全保留）
+ * - hover / focus 时边框高亮（品牌金）
+ * 仅影响视觉，不改变任何搜索/命令面板逻辑。
+ */
 export function Search({ className = '', placeholder }: SearchProps) {
   const { t } = useTranslation()
   const { setOpen } = useSearch()
   const resolvedPlaceholder = placeholder ?? t('Search')
+
+  const openCommandMenu = () => setOpen(true)
+
   return (
-    <Button
-      variant='outline'
-      className={cn(
-        'bg-muted/25 group text-muted-foreground hover:bg-accent relative h-8 w-full flex-1 justify-start rounded-md text-sm font-normal shadow-none sm:w-40 sm:pe-12 md:flex-none lg:w-52 xl:w-64',
-        className
-      )}
-      onClick={() => setOpen(true)}
+    <button
+      type='button'
+      className={cn('tenet-search-box group', className)}
+      role='search'
       aria-label={resolvedPlaceholder}
+      onClick={openCommandMenu}
     >
-      <SearchIcon
-        aria-hidden='true'
-        className='absolute start-1.5 top-1/2 -translate-y-1/2'
-        size={16}
-      />
-      <span className='ms-4'>{resolvedPlaceholder}</span>
-      <kbd className='bg-muted group-hover:bg-accent pointer-events-none absolute end-[0.3rem] top-[0.3rem] hidden h-5 items-center gap-1 rounded border px-1.5 font-mono text-[10px] font-medium opacity-100 select-none sm:flex'>
-        <span className='text-xs'>⌘</span>
-        {t('K')}
-      </kbd>
-    </Button>
+      <span className='tenet-search-icon' aria-hidden='true'>
+        <svg
+          viewBox='0 0 24 24'
+          width='18'
+          height='18'
+          fill='none'
+          stroke='currentColor'
+          strokeWidth='2'
+          strokeLinecap='round'
+          strokeLinejoin='round'
+        >
+          <circle cx='11' cy='11' r='8' />
+          <path d='m21 21-4.3-4.3' />
+        </svg>
+      </span>
+
+      <span className='tenet-search-text'>{resolvedPlaceholder}</span>
+
+      <span className='tenet-search-send' aria-hidden='true'>
+        <svg
+          viewBox='0 0 24 24'
+          width='18'
+          height='18'
+          fill='none'
+          stroke='currentColor'
+          strokeWidth='2'
+          strokeLinecap='round'
+          strokeLinejoin='round'
+        >
+          <path d='m22 2-7 20-4-9-9-4z' />
+          <path d='M22 2 11 13' />
+        </svg>
+      </span>
+    </button>
   )
 }

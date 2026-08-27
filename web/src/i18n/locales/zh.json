@@ -561,7 +561,6 @@
     "Back": "返回",
     "Back to Dashboard": "返回控制台",
     "Back to footnote {{id}} reference": "返回脚注 {{id}} 引用处",
-    "Back to Home": "返回主页",
     "Back to login": "返回登录",
     "Back to Models": "返回模型",
     "Backed up": "已备份",
@@ -5322,6 +5321,25 @@
     "Welcome back": "欢迎回来",
     "Sign in to your TENET account": "登录你的 TENET 账户",
     "Create your account": "创建你的账户",
-    "Join TENET and start building": "加入 TENET，开始构建"
+    "Join TENET and start building": "加入 TENET，开始构建",
+    "Back to Home": "返回首页",
+    "TENET CREED": "信条",
+    "One creed, every model within reach": "一念之轻，接万模之响",
+    "Access a vast selection of models through one unified protocol — manage keys in one place, see usage in real time.": "通过一个统一协议接入海量模型——一处管理密钥，实时查看用量。",
+    "Privacy first": "隐私优先",
+    "We never store request bodies or train on your data — it stays yours.": "不存请求体、不参与训练，数据始终属于你。",
+    "Secure by design": "安全内建",
+    "Full-chain TLS encryption, with key operations auditable end to end.": "全链路 TLS 加密，关键操作全程可审计。",
+    "Instant access": "即开即用",
+    "Register and go — a single API key unlocks every model on the platform.": "注册即开，一个密钥解锁平台上的全部模型。",
+    "Explore the most-used models and growing providers on the platform, updated in real time.": "探索平台上使用最多的模型与增长中的供应商，数据实时更新。",
+    "One unified API, all models": "一个统一 API，全量模型",
+    "One key, one control panel": "一把密钥，一处掌控",
+    "Private by default, yours forever": "默认私密，数据永归你所有",
+    "A creed of clarity — light in weight, vast in reach. One protocol, every model within reach.": "一念之轻，接万模之响——一个协议，触达万物模型。"
   }
 }
+
+
+
+

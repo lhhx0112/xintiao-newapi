@@ -54,6 +54,13 @@ export type SectionPageLayoutProps = {
   fixedContent?: boolean
 }
 
+/**
+ * 页面通用布局：顶部导航头由 AppHeader 固定（sticky）。
+ * 标题行与正文放在同一个可滚动容器里，向下滚动时标题行随内容
+ * 一起滚出（收回），拉回顶部时重新露出 —— 与参考站行为一致。
+ * - fixedContent：正文区自身管理滚动（适合表格类页面），标题行仍可滚动收回
+ * - 默认：整页内容滚动（标题行 + 正文一起滚动）
+ */
 export function SectionPageLayout(props: SectionPageLayoutProps) {
   const [footerContainer, setFooterContainer] = useState<HTMLDivElement | null>(
     null
@@ -79,32 +86,31 @@ export function SectionPageLayout(props: SectionPageLayoutProps) {
   return (
     <PageFooterProvider container={footerContainer}>
       <Main>
-        <div className='shrink-0 px-3 pt-3 pb-2.5 sm:px-4 sm:pt-5 sm:pb-3'>
-          {breadcrumb != null && (
-            <div className='mb-2 sm:mb-3'>{breadcrumb}</div>
-          )}
-          <div className='flex flex-wrap items-center justify-between gap-x-3 gap-y-2 sm:gap-x-4'>
-            <div className='min-w-0 flex-1'>
-              <h2 className='truncate text-base font-bold tracking-tight sm:text-lg'>
-                {title}
-              </h2>
-            </div>
-            {actions != null && (
-              <div className='flex shrink-0 flex-wrap items-center justify-end gap-2 sm:gap-x-4'>
-                {actions}
+        <div className='min-h-0 flex-1 overflow-auto px-3 pt-1 pb-3 sm:px-4 sm:pt-1.5 sm:pb-4'>
+          <div className='mb-2 sm:mb-3'>
+            {breadcrumb != null && <div className='mb-2 sm:mb-3'>{breadcrumb}</div>}
+            <div className='flex flex-wrap items-center justify-between gap-x-3 gap-y-2 sm:gap-x-4'>
+              <div className='min-w-0 flex-1'>
+                <h2 className='truncate text-base font-bold tracking-tight sm:text-lg'>
+                  {title}
+                </h2>
               </div>
-            )}
+              {actions != null && (
+                <div className='flex shrink-0 flex-wrap items-center justify-end gap-2 sm:gap-x-4'>
+                  {actions}
+                </div>
+              )}
+            </div>
           </div>
-        </div>
-
-        <div
-          className={
-            props.fixedContent
-              ? 'min-h-0 flex-1 overflow-hidden px-3 pt-1 pb-3 sm:px-4 sm:pt-1.5 sm:pb-4'
-              : 'min-h-0 flex-1 overflow-auto px-3 pt-1 pb-3 sm:px-4 sm:pt-1.5 sm:pb-4'
-          }
-        >
-          {content}
+          <div
+            className={
+              props.fixedContent
+                ? 'h-full min-h-0 overflow-hidden'
+                : ''
+            }
+          >
+            {content}
+          </div>
         </div>
 
         <div
@@ -120,3 +126,4 @@ SectionPageLayout.Title = SectionPageLayoutTitle
 SectionPageLayout.Actions = SectionPageLayoutActions
 SectionPageLayout.Content = SectionPageLayoutContent
 SectionPageLayout.Breadcrumb = SectionPageLayoutBreadcrumb
+

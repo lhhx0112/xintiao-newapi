@@ -18,7 +18,12 @@ For commercial licensing, please contact support@quantumnous.com
 */
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
 
-import { Sidebar, SidebarContent, SidebarHeader, SidebarRail } from '@/components/ui/sidebar'
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarHeader,
+  SidebarRail,
+} from '@/components/ui/sidebar'
 import { useLayout } from '@/context/layout-provider'
 import { useSidebarView } from '@/hooks/use-sidebar-view'
 import { MOTION_TRANSITION, MOTION_VARIANTS } from '@/lib/motion'
@@ -52,7 +57,7 @@ export function AppSidebar() {
   return (
     <Sidebar collapsible={collapsible} variant={variant}>
       {!view && (
-        <SidebarHeader className='border-sidebar-border h-14 shrink-0 justify-center border-b px-2 py-0'>
+        <SidebarHeader className='border-sidebar-border h-14 shrink-0 justify-center overflow-hidden border-b px-2 py-0'>
           <SystemBrand />
         </SidebarHeader>
       )}

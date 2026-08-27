@@ -23,7 +23,6 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarTrigger,
 } from '@/components/ui/sidebar'
 import { useStatus } from '@/hooks/use-status'
 import { useSystemConfig } from '@/hooks/use-system-config'
@@ -102,11 +101,6 @@ export function SystemBrand(props: SystemBrandProps) {
           </SidebarMenuButton>
         </SidebarMenuItem>
       </SidebarMenu>
-      <SidebarTrigger
-        variant='ghost'
-        size='icon-sm'
-        className='shrink-0 text-sidebar-foreground/70 hover:text-sidebar-foreground'
-      />
     </div>
   )
 }

@@ -44,6 +44,7 @@ import {
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
+  SidebarTrigger,
   useSidebar,
 } from '@/components/ui/sidebar'
 
@@ -60,15 +61,24 @@ import { ChatPresetsItem } from './chat-presets-item'
  * Sidebar navigation group component
  * Renders a group of navigation items, supporting regular links and collapsible submenus
  */
-export function NavGroup({ title, items }: NavGroupProps) {
+export function NavGroup({ id, title, items }: NavGroupProps) {
   const { state, isMobile } = useSidebar()
   const href = useLocation({ select: (location) => location.href })
 
   return (
     <SidebarGroup className='px-2 py-1'>
-      <SidebarGroupLabel className='text-muted-foreground/70 px-2 text-[11px] font-medium tracking-wider uppercase'>
-        {title}
-      </SidebarGroupLabel>
+      <div className='flex h-8 shrink-0 items-center'>
+        <SidebarGroupLabel className='text-muted-foreground/70 px-2 text-[11px] font-medium tracking-wider uppercase group-data-[collapsible=icon]:hidden'>
+          {title}
+        </SidebarGroupLabel>
+        {id === 'chat' && (
+          <SidebarTrigger
+            variant='ghost'
+            size='icon-sm'
+            className='ms-auto text-sidebar-foreground/70 hover:text-sidebar-foreground group-data-[collapsible=icon]:ms-0 group-data-[collapsible=icon]:size-8!'
+          />
+        )}
+      </div>
       <SidebarMenu>
         {items.map((item) => {
           const key = `${item.title}-${item.url || item.type}`
