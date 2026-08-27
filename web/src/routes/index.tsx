@@ -13,13 +13,13 @@ GNU Affero General Public License for more details.
 
 You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <https://www.gnu.org/licenses/>.
-
-For commercial licensing, please contact support@quantumnous.com
 */
-import { createFileRoute } from '@tanstack/react-router'
-
-import { Home } from '@/features/home'
+import { createFileRoute, redirect } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/')({
-  component: Home,
+  // Home landing page is intentionally removed. TENET redirects to the
+  // console; the authenticated route guard will send guests to /sign-in.
+  beforeLoad: () => {
+    throw redirect({ to: '/dashboard' })
+  },
 })

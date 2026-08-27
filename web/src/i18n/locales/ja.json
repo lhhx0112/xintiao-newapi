@@ -1502,7 +1502,7 @@
     "e.g. llama3.1:8b": "例: llama3.1:8b",
     "e.g. My GitLab": "例: My GitLab",
     "e.g. my-gitlab": "例: my-gitlab",
-    "e.g. New API Console": "例: New API コンソール",
+    "e.g. TENET Console": "例: TENET コンソール",
     "e.g. openid profile email": "例: openid profile email",
     "e.g. Requires level {{required}}; your current level is {{current}}": "例：レベル {{required}} が必要です。現在のレベルは {{current}} です",
     "e.g. Suitable for light usage": "例：ライトユーザー向け",
@@ -2069,7 +2069,7 @@
     "footer.columns.related.links.oneApi": "1つのAPI",
     "footer.columns.related.title": "関連プロジェクト",
     "footer.defaultCopyright": "すべての権利を留保します。",
-    "footer.new\u0061pi.projectAttributionSuffix": "すべての権利を留保します。プロジェクトコントリビューターにより設計・開発されています。",
+    "footer.newapi.projectAttributionSuffix": "すべての権利を留保します。プロジェクトコントリビューターにより設計・開発されています。",
     "For channels added after May 10, 2025, no need to remove \".\" from model names during deployment": "2025 年 5 月 10 日以降に追加されたチャネルの場合、デプロイ時にモデル名から「.」を削除する必要はありません",
     "For private deployments, format: https://fastgpt.run/api/openapi": "プライベートデプロイメントの場合、形式: https://fastgpt.run/api/openapi",
     "For security, existing access tokens cannot be displayed. Regenerate only when you need a new token.": "セキュリティ上、既存のアクセストークンは再表示できません。新しいトークンが必要な場合のみ再生成してください。",
@@ -2875,8 +2875,8 @@
     "Never used an API Gateway?": "APIゲートウェイを一度も使用したことがありませんか？",
     "NEW": "NEW",
     "New API": "新しいAPI",
-    "New API &lt;noreply@example.com&gt;": "新しいAPI __ PH_0 __",
-    "New API Project Repository:": "New APIプロジェクトリポジトリ:",
+    "TENET 信条 &lt;noreply@example.com&gt;": "新しいAPI __ PH_0 __",
+    "TENET Project Repository:": "TENETプロジェクトリポジトリ:",
     "New Format Template": "新フォーマットテンプレート",
     "New Group": "新しいグループ",
     "New model": "新しいモデル",
@@ -5232,7 +5232,7 @@
     "Weight": "ウェイト",
     "Weighted by request count": "リクエスト数で加重",
     "Welcome back!": "おかえりなさい！",
-    "Welcome to our New API...": "New API へようこそ...",
+    "Welcome to TENET 信条...": "New API へようこそ...",
     "Well-Known URL": "よく知られたURL",
     "Well-Known URL must start with http:// or https://": "Well-Known URL は http:// または https:// で始まる必要があります",
     "What would you like to know?": "何を知りたいですか？",
@@ -5316,6 +5316,8 @@
     "Zero retention": "データ保持なし",
     "Zhipu": "Zhipu",
     "Zhipu V4": "Zhipu V 4",
-    "Zoom": "ズーム"
+    "Zoom": "ズーム",
+    "Version Name": "版本名称",
+    "Version number shown in the sidebar brand area": "侧边栏品牌区域显示的版本号"
   }
 }

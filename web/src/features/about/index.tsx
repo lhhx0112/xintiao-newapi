@@ -46,53 +46,20 @@ function EmptyAboutState() {
           </p>
         </div>
         <div className='space-y-4 text-sm'>
-          <p>
-            {t('New API Project Repository:')}{' '}
-            <a
-              href='https://github.com/QuantumNous/new-api'
-              target='_blank'
-              rel='noopener noreferrer'
-              className='text-primary hover:underline'
-            >
-              {t('https://github.com/QuantumNous/new-api')}
-            </a>
+          <p className='text-muted-foreground'>
+            {t('TENET 信条')} · {t('Intelligent Minimalism')} · © {currentYear}
           </p>
           <p className='text-muted-foreground'>
+            {t('Powered by the open-source')}{' '}
             <a
               href='https://github.com/QuantumNous/new-api'
               target='_blank'
               rel='noopener noreferrer'
               className='text-primary hover:underline'
             >
-              {t('NewAPI')}
+              {t('New API')}
             </a>{' '}
-            © {currentYear}{' '}
-            <a
-              href='https://github.com/QuantumNous'
-              target='_blank'
-              rel='noopener noreferrer'
-              className='text-primary hover:underline'
-            >
-              {t('QuantumNous')}
-            </a>{' '}
-            {t('| Based on')}{' '}
-            <a
-              href='https://github.com/songquanpeng/one-api'
-              target='_blank'
-              rel='noopener noreferrer'
-              className='text-primary hover:underline'
-            >
-              {t('One API')}
-            </a>{' '}
-            © 2023{' '}
-            <a
-              href='https://github.com/songquanpeng'
-              target='_blank'
-              rel='noopener noreferrer'
-              className='text-primary hover:underline'
-            >
-              {t('JustSong')}
-            </a>
+            {t('project (AGPL v3.0).')}
           </p>
           <p className='text-muted-foreground'>
             {t('This project must be used in compliance with the')}{' '}

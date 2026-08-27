@@ -1502,7 +1502,7 @@
     "e.g. llama3.1:8b": "например llama3.1:8b",
     "e.g. My GitLab": "например, My GitLab",
     "e.g. my-gitlab": "например, my-gitlab",
-    "e.g. New API Console": "напр. консоль New API",
+    "e.g. TENET Console": "напр. консоль TENET",
     "e.g. openid profile email": "например, openid profile email",
     "e.g. Requires level {{required}}; your current level is {{current}}": "напр. Требуется уровень {{required}}; ваш текущий уровень — {{current}}",
     "e.g. Suitable for light usage": "напр. Подходит для лёгкого использования",
@@ -2069,7 +2069,7 @@
     "footer.columns.related.links.oneApi": "Один API",
     "footer.columns.related.title": "Связанные проекты",
     "footer.defaultCopyright": "Все права защищены.",
-    "footer.new\u0061pi.projectAttributionSuffix": "Все права защищены. Разработано участниками проекта.",
+    "footer.newapi.projectAttributionSuffix": "Все права защищены. Разработано участниками проекта.",
     "For channels added after May 10, 2025, no need to remove \".\" from model names during deployment": "Для каналов, добавленных после 10 мая 2025 г., не нужно удалять \".\" из имён моделей при развёртывании",
     "For private deployments, format: https://fastgpt.run/api/openapi": "Для частных развертываний, формат: https://fastgpt.run/api/openapi",
     "For security, existing access tokens cannot be displayed. Regenerate only when you need a new token.": "В целях безопасности существующие токены доступа нельзя просмотреть повторно. Создавайте новый токен только при необходимости.",
@@ -2875,8 +2875,8 @@
     "Never used an API Gateway?": "Никогда не пользовались API-шлюзом?",
     "NEW": "НОВОЕ",
     "New API": "Новый API",
-    "New API &lt;noreply@example.com&gt;": "Новый API &lt;noreply@example.com&gt;",
-    "New API Project Repository:": "Репозиторий проекта New API:",
+    "TENET 信条 &lt;noreply@example.com&gt;": "Новый API &lt;noreply@example.com&gt;",
+    "TENET Project Repository:": "Репозиторий проекта TENET:",
     "New Format Template": "Шаблон нового формата",
     "New Group": "Новая группа",
     "New model": "Новая модель",
@@ -5232,7 +5232,7 @@
     "Weight": "Вес",
     "Weighted by request count": "Взвешено по количеству запросов",
     "Welcome back!": "Добро пожаловать обратно!",
-    "Welcome to our New API...": "Добро пожаловать в наш New API...",
+    "Welcome to TENET 信条...": "Добро пожаловать в наш New API...",
     "Well-Known URL": "Известный эксперт",
     "Well-Known URL must start with http:// or https://": "Well-Known URL должен начинаться с http:// или https://",
     "What would you like to know?": "Что вы хотели бы узнать?",
@@ -5316,6 +5316,8 @@
     "Zero retention": "Без хранения данных",
     "Zhipu": "Zhipu",
     "Zhipu V4": "Zhipu V4",
-    "Zoom": "Zoom"
+    "Zoom": "Zoom",
+    "Version Name": "版本名称",
+    "Version number shown in the sidebar brand area": "侧边栏品牌区域显示的版本号"
   }
 }

@@ -25,9 +25,13 @@ import { toast } from 'sonner'
 import type { z } from 'zod'
 
 import { Dialog } from '@/components/dialog'
-import { PasswordInput } from '@/components/password-input'
+import {
+  FloatingLabelInput,
+  FloatingLabelPasswordInput,
+} from '@/components/floating-label-input'
 import { Turnstile } from '@/components/turnstile'
 import { Button } from '@/components/ui/button'
+import { AnimatedButton } from '@/components/animated-button'
 import {
   Form,
   FormControl,
@@ -253,9 +257,16 @@ export function SignUpForm({
           name='username'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{t('Username')}</FormLabel>
+              <FormLabel className='sr-only'>{t('Username')}</FormLabel>
               <FormControl>
-                <Input placeholder={t('Enter your username')} {...field} />
+                <FloatingLabelInput
+                  label={t('Username')}
+                  {...field}
+                  onBlur={() => {
+                    field.onBlur()
+                    form.trigger('username')
+                  }}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -268,11 +279,15 @@ export function SignUpForm({
           name='password'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{t('Password')}</FormLabel>
+              <FormLabel className='sr-only'>{t('Password')}</FormLabel>
               <FormControl>
-                <PasswordInput
-                  placeholder={t('Enter password (8-20 characters)')}
+                <FloatingLabelPasswordInput
+                  label={t('Password')}
                   {...field}
+                  onBlur={() => {
+                    field.onBlur()
+                    form.trigger('password')
+                  }}
                 />
               </FormControl>
               <FormMessage />
@@ -286,9 +301,16 @@ export function SignUpForm({
           name='confirmPassword'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{t('Confirm password')}</FormLabel>
+              <FormLabel className='sr-only'>{t('Confirm password')}</FormLabel>
               <FormControl>
-                <PasswordInput placeholder={t('Confirm password')} {...field} />
+                <FloatingLabelPasswordInput
+                  label={t('Confirm password')}
+                  {...field}
+                  onBlur={() => {
+                    field.onBlur()
+                    form.trigger('confirmPassword')
+                  }}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -304,14 +326,18 @@ export function SignUpForm({
               name='email'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>
+                  <FormLabel className='sr-only'>
                     {t('Email (required for verification)')}
                   </FormLabel>
                   <FormControl>
-                    <Input
-                      placeholder={t('name@example.com')}
+                    <FloatingLabelInput
+                      label={t('Email (required for verification)')}
                       type='email'
                       {...field}
+                      onBlur={() => {
+                        field.onBlur()
+                        form.trigger('email')
+                      }}
                     />
                   </FormControl>
                   <FormMessage />
@@ -322,10 +348,15 @@ export function SignUpForm({
             {/* Verification Code Field */}
             <div className='flex items-end gap-2'>
               <div className='flex-1'>
-                <Input
-                  placeholder={t('Verification code')}
+                <FloatingLabelInput
+                  label={t('Verification code')}
                   value={verificationCode}
                   onChange={(e) => setVerificationCode(e.target.value)}
+                  onBlur={() => {
+                    if (!verificationCode.trim()) {
+                      toast.error(t('Please enter the verification code'))
+                    }
+                  }}
                 />
               </div>
               <Button
@@ -365,18 +396,18 @@ export function SignUpForm({
         />
 
         {/* Submit Button */}
-        <Button
+        <AnimatedButton
           type='submit'
-          className='mt-2 w-full justify-center gap-2'
+          className='mt-2 w-full justify-center'
+          loading={isLoading}
           disabled={
             isLoading ||
             (requiresLegalConsent && !agreedToLegal) ||
             !turnstileReady
           }
         >
-          {isLoading ? <Loader2 className='h-4 w-4 animate-spin' /> : null}
           {t('Create account')}
-        </Button>
+        </AnimatedButton>
 
         {oauthRegisterEnabled && (
           <OAuthProviders

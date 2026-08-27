@@ -20,24 +20,36 @@ import { useRouterState } from '@tanstack/react-router'
 import { useEffect, useRef } from 'react'
 import LoadingBar, { type LoadingBarRef } from 'react-top-loading-bar'
 
+import { cn } from '@/lib/utils'
+
 export function NavigationProgress() {
   const ref = useRef<LoadingBarRef>(null)
   const state = useRouterState()
+  const isPending = state.status === 'pending'
 
   useEffect(() => {
-    if (state.status === 'pending') {
+    if (isPending) {
       ref.current?.continuousStart()
     } else {
       ref.current?.complete()
     }
-  }, [state.status])
+  }, [isPending])
 
   return (
-    <LoadingBar
-      color='var(--muted-foreground)'
-      ref={ref}
-      shadow={true}
-      height={2}
-    />
+    <>
+      <LoadingBar
+        color='var(--tenet-gold, #cda047)'
+        ref={ref}
+        shadow={true}
+        height={2}
+      />
+      <div
+        aria-hidden='true'
+        className={cn(
+          'tenet-progress-sheen',
+          isPending ? 'opacity-100' : 'opacity-0'
+        )}
+      />
+    </>
   )
 }

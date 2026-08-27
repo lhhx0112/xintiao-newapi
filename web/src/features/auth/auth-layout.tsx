@@ -20,6 +20,7 @@ import { Link } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
 
 import { Skeleton } from '@/components/ui/skeleton'
+import { LanguageSwitcher } from '@/components/language-switcher'
 import { useSystemConfig } from '@/hooks/use-system-config'
 
 type AuthLayoutProps = {
@@ -31,31 +32,41 @@ export function AuthLayout({ children }: AuthLayoutProps) {
   const { systemName, logo, loading } = useSystemConfig()
 
   return (
-    <div className='relative grid h-svh max-w-none'>
+    <div className='relative grid h-svh max-w-none place-items-center overflow-hidden'>
+      {/* 顶部品牌：左上角 logo + 名称 */}
       <Link
         to='/'
         className='absolute top-4 left-4 z-10 flex items-center gap-2 transition-opacity hover:opacity-80 sm:top-8 sm:left-8'
       >
-        <div className='relative h-8 w-8'>
+        <div className='relative h-9 w-9'>
           {loading ? (
-            <Skeleton className='absolute inset-0 rounded-full' />
+            <Skeleton className='absolute inset-0 rounded-xl' />
           ) : (
             <img
               src={logo}
               alt={t('Logo')}
-              className='h-8 w-8 rounded-full object-cover'
+              className='h-9 w-9 rounded-xl object-contain shadow-sm'
             />
           )}
         </div>
         {loading ? (
-          <Skeleton className='h-6 w-24' />
+          <Skeleton className='h-6 w-28' />
         ) : (
-          <h1 className='text-xl font-medium'>{systemName}</h1>
+          <h1 className='text-lg font-medium tracking-tight'>{systemName}</h1>
         )}
       </Link>
-      <div className='container flex items-center pt-16 sm:pt-0'>
-        <div className='mx-auto flex w-full flex-col justify-center space-y-2 px-4 py-8 sm:w-[480px] sm:p-8'>
-          {children}
+
+      {/* 中央卡片 */}
+      <div className='container flex items-center justify-center px-4 sm:pt-0'>
+        <div className='relative w-full max-w-md'>
+          <div className='absolute top-3 right-3 z-20'>
+            <LanguageSwitcher />
+          </div>
+          <div className='border-border/60 from-card/90 to-card/60 bg-gradient-to-b p-6 shadow-[0_20px_50px_-20px_rgba(120,80,30,0.25)] ring-1 ring-black/5 sm:rounded-3xl sm:p-8 sm:ring-1'>
+            <div className='mx-auto flex w-full flex-col space-y-6'>
+              {children}
+            </div>
+          </div>
         </div>
       </div>
     </div>

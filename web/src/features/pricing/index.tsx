@@ -166,9 +166,9 @@ export function Pricing() {
           className='pointer-events-none absolute inset-x-0 top-0 h-[600px] opacity-20 dark:opacity-[0.10]'
           style={{
             background: [
-              'radial-gradient(ellipse 60% 50% at 20% 20%, oklch(0.72 0.18 250 / 80%) 0%, transparent 70%)',
-              'radial-gradient(ellipse 50% 40% at 80% 15%, oklch(0.65 0.15 200 / 60%) 0%, transparent 70%)',
-              'radial-gradient(ellipse 40% 35% at 50% 70%, oklch(0.70 0.12 280 / 40%) 0%, transparent 70%)',
+              'radial-gradient(ellipse 60% 50% at 20% 20%, oklch(0.75 0.12 75 / 60%) 0%, transparent 70%)',
+              'radial-gradient(ellipse 50% 40% at 80% 15%, oklch(0.68 0.11 75 / 45%) 0%, transparent 70%)',
+              'radial-gradient(ellipse 40% 35% at 50% 70%, oklch(0.78 0.09 85 / 30%) 0%, transparent 70%)',
             ].join(', '),
             maskImage:
               'linear-gradient(to bottom, black 40%, transparent 100%)',
