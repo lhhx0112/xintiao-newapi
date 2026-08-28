@@ -16,6 +16,7 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 For commercial licensing, please contact support@quantumnous.com
 */
+import { Activity, BookOpen, Info, LayoutDashboard, Rocket } from 'lucide-react'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -29,6 +30,8 @@ export type TopNavLink = {
   disabled?: boolean
   requiresAuth?: boolean
   external?: boolean
+  /** 顶部导航链接对应的图标（与侧边栏一致，帮助用户理解入口用途） */
+  icon?: React.ElementType
 }
 
 /**
@@ -64,35 +67,54 @@ export function useTopNavLinks(): TopNavLink[] {
 
   // Console -> /dashboard (new console path)
   if (modules?.console !== false) {
-    links.push({ title: t('Console'), href: '/dashboard' })
+    links.push({
+      title: t('Console'),
+      href: '/dashboard',
+      icon: LayoutDashboard,
+    })
   }
 
   // Pricing
   const pricing = modules?.pricing
   if (pricing && typeof pricing === 'object' && pricing.enabled) {
     const requiresAuth = pricing.requireAuth && !isAuthed
-    links.push({ title: t('Model Square'), href: '/pricing', requiresAuth })
+    links.push({
+      title: t('Model Square'),
+      href: '/pricing',
+      requiresAuth,
+      icon: Rocket,
+    })
   }
 
   // Rankings
   const rankings = modules?.rankings
   if (rankings && typeof rankings === 'object' && rankings.enabled) {
     const requiresAuth = rankings.requireAuth && !isAuthed
-    links.push({ title: t('Rankings'), href: '/rankings', requiresAuth })
+    links.push({
+      title: t('Rankings'),
+      href: '/rankings',
+      requiresAuth,
+      icon: Activity,
+    })
   }
 
   // Docs (supports external links)
   if (modules?.docs !== false) {
     if (docsLink) {
-      links.push({ title: t('Docs'), href: docsLink, external: true })
+      links.push({
+        title: t('Docs'),
+        href: docsLink,
+        external: true,
+        icon: BookOpen,
+      })
     } else {
-      links.push({ title: t('Docs'), href: '/docs' })
+      links.push({ title: t('Docs'), href: '/docs', icon: BookOpen })
     }
   }
 
   // About
   if (modules?.about !== false) {
-    links.push({ title: t('About'), href: '/about' })
+    links.push({ title: t('About'), href: '/about', icon: Info })
   }
 
   return links

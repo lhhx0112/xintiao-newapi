@@ -431,3 +431,235 @@ body {
     transition: none;
   }
 }
+
+/* ===== TENET 搜索框（顶部导航） =====
+   参考用户提供的开源 messageBox 组件样式：
+   - 深色圆角消息框 + 左侧搜索图标 + 中间提示文字 + 右侧发送按钮
+   - focus-within 边框高亮；图标 hover 变白/填充
+   配色按 TENET 暖白 + 古铜金设计语言（亮/暗两种模式）。
+   仅影响视觉，不改变任何搜索/命令面板逻辑。 */
+.tenet-search-box {
+  width: fit-content;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: oklch(0.955 0.008 86);
+  padding: 0 15px;
+  border-radius: 10px;
+  border: 1px solid oklch(0.62 0.12 70 / 0.35);
+  gap: 6px;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+  color: inherit;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+.dark .tenet-search-box {
+  background-color: oklch(0.3 0.008 60);
+  border: 1px solid oklch(1 0 0 / 16%);
+}
+.tenet-search-box:hover {
+  border-color: oklch(0.62 0.12 70 / 0.6);
+  background-color: oklch(0.99 0.003 88);
+}
+.dark .tenet-search-box:hover {
+  border-color: oklch(0.72 0.12 78 / 0.5);
+  background-color: oklch(0.32 0.008 60);
+}
+.tenet-search-box:focus-within {
+  border-color: oklch(0.62 0.12 70 / 0.7);
+  background-color: oklch(0.99 0.003 88);
+}
+.dark .tenet-search-box:focus-within {
+  border-color: oklch(0.72 0.12 78 / 0.6);
+  background-color: oklch(0.32 0.008 60);
+}
+
+.tenet-search-icon,
+.tenet-search-send {
+  width: fit-content;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  color: oklch(0.5 0.015 60);
+  padding: 0;
+  transition: color 0.3s ease;
+}
+.dark .tenet-search-icon,
+.dark .tenet-search-send {
+  color: oklch(0.76 0.01 80);
+}
+.tenet-search-icon:hover,
+.tenet-search-send:hover {
+  color: oklch(0.6 0.11 68);
+}
+.dark .tenet-search-icon:hover,
+.dark .tenet-search-send:hover {
+  color: oklch(0.72 0.12 78);
+}
+
+.tenet-search-text {
+  min-width: 120px;
+  padding-left: 10px;
+  padding-right: 8px;
+  font-size: 14px;
+  color: oklch(0.5 0.015 60);
+  text-align: left;
+  white-space: nowrap;
+  user-select: none;
+  cursor: text;
+}
+.dark .tenet-search-text {
+  color: oklch(0.76 0.01 80);
+}
+.tenet-search-box:focus-within .tenet-search-text {
+  color: oklch(0.32 0.012 60);
+}
+.dark .tenet-search-box:focus-within .tenet-search-text {
+  color: oklch(0.98 0.006 88);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tenet-search-box,
+  .tenet-search-icon,
+  .tenet-search-send,
+  .tenet-search-text {
+    transition: none;
+  }
+}
+
+
+
+
+
+/* ===== TENET 认证页品牌面板（登录/注册左栏，轻奢香槟金） =====
+   象牙白画布 + 香槟金渐变光晕 + 暖金描边，呼应品牌暖白 + 古铜金点缀。
+   仅影响视觉，不改任何表单逻辑。 */
+.tenet-auth-brand {
+  background-color: oklch(0.96 0.015 82);
+  background-image:
+    radial-gradient(
+      130% 90% at 8% 0%,
+      oklch(0.86 0.07 75 / 0.9),
+      transparent 58%
+    ),
+    radial-gradient(
+      120% 70% at 95% 100%,
+      oklch(0.82 0.06 70 / 0.7),
+      transparent 55%
+    ),
+    linear-gradient(
+      155deg,
+      oklch(0.985 0.012 86),
+      oklch(0.96 0.015 82) 48%,
+      oklch(0.92 0.02 78)
+    );
+  color: oklch(0.3 0.02 55);
+}
+.dark .tenet-auth-brand {
+  background-color: oklch(0.2 0.012 60);
+  background-image:
+    radial-gradient(
+      130% 90% at 8% 0%,
+      oklch(0.55 0.09 68 / 0.32),
+      transparent 58%
+    ),
+    radial-gradient(
+      120% 70% at 95% 100%,
+      oklch(0.5 0.07 62 / 0.25),
+      transparent 55%
+    ),
+    linear-gradient(
+      155deg,
+      oklch(0.24 0.014 60),
+      oklch(0.2 0.012 58) 48%,
+      oklch(0.17 0.01 56)
+    );
+  color: oklch(0.94 0.02 80);
+}
+
+/* ===== TENET 认证页悬浮表单卡片 =====
+   暖白半透明卡片 + 香槟金描边 + 柔和投影，悬浮于背景之上。 */
+.tenet-auth-card {
+  border-radius: 1.25rem;
+  border: 1px solid oklch(0.72 0.1 72 / 0.35);
+  background: linear-gradient(
+    180deg,
+    oklch(0.99 0.006 88 / 0.92),
+    oklch(0.975 0.01 84 / 0.88)
+  );
+  box-shadow:
+    0 24px 60px -24px oklch(0.62 0.12 70 / 0.35),
+    0 8px 24px -16px oklch(0.62 0.12 70 / 0.2);
+  padding: 2rem 2.25rem;
+  backdrop-filter: blur(14px);
+}
+.dark .tenet-auth-card {
+  border-color: oklch(0.72 0.12 78 / 0.3);
+  background: linear-gradient(
+    180deg,
+    oklch(0.28 0.012 60 / 0.92),
+    oklch(0.24 0.01 58 / 0.9)
+  );
+  box-shadow:
+    0 24px 60px -24px oklch(0.12 0.01 60 / 0.7),
+    0 8px 24px -16px oklch(0.72 0.12 78 / 0.15);
+}
+
+@media (max-width: 1023px) {
+  .tenet-auth-card {
+    padding: 1.5rem 1.25rem;
+    border-radius: 1rem;
+  }
+}
+
+/* ===== TENET 认证页整屏沉浸式品牌背景 =====
+   由 .tenet-auth-page 承载（覆盖整屏，含右栏），左栏内容叠在其上。 */
+.tenet-auth-page {
+  background-color: oklch(0.96 0.015 82);
+  background-image:
+    radial-gradient(
+      130% 90% at 8% 0%,
+      oklch(0.86 0.07 75 / 0.9),
+      transparent 58%
+    ),
+    radial-gradient(
+      120% 70% at 95% 100%,
+      oklch(0.82 0.06 70 / 0.7),
+      transparent 55%
+    ),
+    linear-gradient(
+      155deg,
+      oklch(0.985 0.012 86),
+      oklch(0.96 0.015 82) 48%,
+      oklch(0.92 0.02 78)
+    );
+  color: oklch(0.3 0.02 55);
+}
+.dark .tenet-auth-page {
+  background-color: oklch(0.2 0.012 60);
+  background-image:
+    radial-gradient(
+      130% 90% at 8% 0%,
+      oklch(0.55 0.09 68 / 0.32),
+      transparent 58%
+    ),
+    radial-gradient(
+      120% 70% at 95% 100%,
+      oklch(0.5 0.07 62 / 0.25),
+      transparent 55%
+    ),
+    linear-gradient(
+      155deg,
+      oklch(0.24 0.014 60),
+      oklch(0.2 0.012 58) 48%,
+      oklch(0.17 0.01 56)
+    );
+  color: oklch(0.94 0.02 80);
+}

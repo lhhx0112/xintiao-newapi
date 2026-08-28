@@ -551,6 +551,23 @@ export const STATIC_I18N_KEYS = [
   'The model that was requested',
   'The upstream channel that served the requests',
 
+  // Auth brand panel (login/sign-up left column)
+  'Back to Home',
+  'TENET CREED',
+  'One creed, every model within reach',
+  'Access a vast selection of models through one unified protocol — manage keys in one place, see usage in real time.',
+  'Privacy first',
+  'We never store request bodies or train on your data — it stays yours.',
+  'Secure by design',
+  'Full-chain TLS encryption, with key operations auditable end to end.',
+  'Instant access',
+  'Register and go — a single API key unlocks every model on the platform.',
+  'Explore the most-used models and growing providers on the platform, updated in real time.',
+  'One unified API, all models',
+  'One key, one control panel',
+  'Private by default, yours forever',
+  'A creed of clarity — light in weight, vast in reach. One protocol, every model within reach.',
+
   // Misc
   'Cancel',
   'Status',
@@ -573,3 +590,5 @@ export const STATIC_I18N_KEYS = [
   'Telegram binding failed. Please try again.',
   'Verification scope is missing',
 ] as const
+
+

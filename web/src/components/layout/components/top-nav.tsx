@@ -20,6 +20,7 @@ import { Link } from '@tanstack/react-router'
 import { Menu } from 'lucide-react'
 import { useMemo } from 'react'
 
+import * as React from 'react'
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -31,15 +32,16 @@ import { cn } from '@/lib/utils'
 
 import { type TopNavLink } from '../types'
 
+
 type TopNavProps = React.HTMLAttributes<HTMLElement> & {
   links: TopNavLink[]
+  /**
+   * 附加在导航链接之后的尾部内容（例如搜索框），参与 justify-between 均分
+   */
+  trailing?: React.ReactNode
 }
 
-/**
- * 顶部导航栏组件
- * 在大屏幕显示水平导航，在小屏幕显示下拉菜单
- */
-export function TopNav({ className, links, ...props }: TopNavProps) {
+export function TopNav({ className, links, trailing, ...props }: TopNavProps) {
   // 规范化链接，确保所有可选属性都有默认值
   const normalizedLinks = useMemo(
     () =>
@@ -64,7 +66,7 @@ export function TopNav({ className, links, ...props }: TopNavProps) {
           </DropdownMenuTrigger>
           <DropdownMenuContent side='bottom' align='start'>
             {normalizedLinks.map(
-              ({ title, href, isActive, disabled, external }) => (
+              ({ title, href, isActive, disabled, external, icon }) => (
                 <DropdownMenuItem
                   key={`${title}-${href}`}
                   render={
@@ -75,6 +77,7 @@ export function TopNav({ className, links, ...props }: TopNavProps) {
                         rel='noopener noreferrer'
                         className={!isActive ? 'text-muted-foreground' : ''}
                       >
+                        {icon ? React.createElement(icon, { className: 'size-4 shrink-0', 'aria-hidden': 'true' }) : null}
                         {title}
                       </a>
                     ) : (
@@ -83,6 +86,7 @@ export function TopNav({ className, links, ...props }: TopNavProps) {
                         className={!isActive ? 'text-muted-foreground' : ''}
                         disabled={disabled}
                       >
+                        {icon ? React.createElement(icon, { className: 'size-4 shrink-0', 'aria-hidden': 'true' }) : null}
                         {title}
                       </Link>
                     )
@@ -97,12 +101,14 @@ export function TopNav({ className, links, ...props }: TopNavProps) {
       {/* 桌面端水平导航 */}
       <nav
         className={cn(
-          'hidden items-center gap-5 lg:flex lg:gap-5 xl:gap-7',
+          'hidden w-full items-center justify-between gap-8 md:flex',
           className
         )}
         {...props}
       >
-        {normalizedLinks.map(({ title, href, isActive, disabled, external }) =>
+        {normalizedLinks.map((
+          { title, href, isActive, disabled, external, icon },
+        ) =>
           external ? (
             <a
               key={`${title}-${href}`}
@@ -111,6 +117,7 @@ export function TopNav({ className, links, ...props }: TopNavProps) {
               rel='noopener noreferrer'
               className={`hover:text-primary text-sm font-medium transition-colors ${isActive ? '' : 'text-muted-foreground'}`}
             >
+              {icon ? React.createElement(icon, { className: 'size-4 shrink-0', 'aria-hidden': 'true' }) : null}
               {title}
             </a>
           ) : (
@@ -120,11 +127,14 @@ export function TopNav({ className, links, ...props }: TopNavProps) {
               disabled={disabled}
               className={`hover:text-primary text-sm font-medium transition-colors ${isActive ? '' : 'text-muted-foreground'}`}
             >
+              {icon ? React.createElement(icon, { className: 'size-4 shrink-0', 'aria-hidden': 'true' }) : null}
               {title}
             </Link>
           )
         )}
+        {trailing}
       </nav>
     </>
   )
 }
+
