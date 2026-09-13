@@ -19,7 +19,7 @@
 
 ---
 
-> **本仓库基于 [QuantumNous/new-api](https://github.com/QuantumNous/new-api) 二次开发**，
+> **本仓库基于 [QuantumNous/new-api](https://github.com/QuantumNous/new-api) 二次开发，本人已加入爱发电计划主页链接https://afdian.com/a/lhhx0112**，
 > 在保留上游核心业务能力（认证、渠道、计费、转发、API Key 等）的前提下，
 > 对前端体验层、视觉与交互设计进行了品牌化改造。
 >
